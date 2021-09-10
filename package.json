@@ -1,0 +1,15 @@
+{
+  "name": "p_show",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "author": "losor",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.13.1",
+    "koa-router": "^10.1.1"
+  }
+}

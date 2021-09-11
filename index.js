@@ -5,12 +5,29 @@ const {createRandomNumber} = require("./lib/random");
 const app = new Koa();
 const router = new Router();
 
+let passCode = createRandomNumber(10000, 100000);
+
 router.get("/authenticate", (ctx, next) => {
+  passCode = createRandomNumber(10000, 100000);
   ctx.body = {
     status: 'success',
-    code: createRandomNumber(10000, 100000),
+    code: passCode
   };
+  next();
 });
+
+router.get("/certify", (ctx, next) => {
+  const {type, code} = ctx.query;
+  if(type === "local") {
+    ctx.body = {
+      status: Number.parseInt(code) === passCode ? "success" : "fail"
+    };
+  }
+  passCode = createRandomNumber(10000, 100000);
+  next();
+});
+
+
 app
   .use(Logger())
   .use(router.routes())
